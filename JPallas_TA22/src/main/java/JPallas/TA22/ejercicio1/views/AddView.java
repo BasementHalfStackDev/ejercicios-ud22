@@ -87,5 +87,7 @@ public class AddView extends JFrame {
 		btnAdd = new JButton("Add");
 		btnAdd.setBounds(269, 152, 89, 23);
 		contentPane.add(btnAdd);
+		
+		setVisible(true);
 	}
 }

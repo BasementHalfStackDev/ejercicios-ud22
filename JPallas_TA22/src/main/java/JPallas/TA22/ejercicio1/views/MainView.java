@@ -45,5 +45,7 @@ public class MainView extends JFrame {
 		list = new JList();
 		list.setBounds(175, 68, 1, 1);
 		contentPane.add(list);
+		
+		setVisible(true);
 	}
 }
