@@ -22,7 +22,6 @@ public class AddViewController {
 	// Controller
 	public AddViewController(AddView view) {
 		this.view = view;
-		this.cliente = cliente;
 		view.btnAdd.addActionListener(addbtn);
 	}
 
