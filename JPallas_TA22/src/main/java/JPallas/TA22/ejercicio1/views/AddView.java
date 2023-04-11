@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
-public class addView extends JFrame {
+public class AddView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldNombre;
@@ -20,27 +20,11 @@ public class addView extends JFrame {
 	private JTextField textFieldFecha;
 	private JLabel lblFecha;
 	private JButton btnAdd;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					addView frame = new addView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
 	 */
-	public addView() {
+	public AddView() {
 		setTitle("Add User");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 680, 241);

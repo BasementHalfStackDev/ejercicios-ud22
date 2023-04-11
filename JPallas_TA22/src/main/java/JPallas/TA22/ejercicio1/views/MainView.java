@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
-public class mainView extends JFrame {
+public class MainView extends JFrame {
 
 	private JPanel contentPane;
 
@@ -20,7 +20,7 @@ public class mainView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public mainView() {
+	public MainView() {
 		setTitle("SQL view");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 994, 390);
