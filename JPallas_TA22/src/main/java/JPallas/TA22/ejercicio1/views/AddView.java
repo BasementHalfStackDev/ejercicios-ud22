@@ -13,19 +13,18 @@ import javax.swing.JButton;
 public class AddView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textFieldNombre;
-	private JTextField textFieldApellido;
-	private JTextField textFieldDireccion;
-	private JTextField textFieldDNI;
-	private JTextField textFieldFecha;
-	private JLabel lblFecha;
-	private JButton btnAdd;
+	public JTextField textFieldNombre;
+	public JTextField textFieldApellido;
+	public JTextField textFieldDireccion;
+	public JTextField textFieldDNI;
+	public JTextField textFieldFecha;
+	public JButton btnAdd;
 	
 	/**
 	 * Create the frame.
 	 */
 	public AddView() {
-		setTitle("Add User");
+		setTitle("Add Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 680, 241);
 		contentPane = new JPanel();
@@ -79,7 +78,7 @@ public class AddView extends JFrame {
 		textFieldFecha.setBounds(320, 104, 158, 20);
 		contentPane.add(textFieldFecha);
 		
-		lblFecha = new JLabel("Fecha");
+		JLabel lblFecha = new JLabel("Fecha");
 		lblFecha.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFecha.setBounds(369, 79, 46, 14);
 		contentPane.add(lblFecha);

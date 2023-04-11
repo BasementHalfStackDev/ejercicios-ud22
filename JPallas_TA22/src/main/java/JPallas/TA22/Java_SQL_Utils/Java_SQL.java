@@ -12,7 +12,6 @@ public class Java_SQL {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://192.168.1.177:3306", "java", "Java_R00t");
-			System.out.println("Connected");
 			return conexion;
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println("Connection couldn't be established");
@@ -25,7 +24,6 @@ public class Java_SQL {
 	public static void closeConnection(Connection conexion) {
 		try {
 			conexion.close();
-			System.out.println("Connection closed");
 		} catch (SQLException e) {
 			System.out.println("Connection couldn't be closed");
 			System.out.println(e);

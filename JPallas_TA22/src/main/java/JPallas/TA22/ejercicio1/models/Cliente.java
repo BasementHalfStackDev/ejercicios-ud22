@@ -112,9 +112,9 @@ public class Cliente {
 				return formattedDate;
 			}
 		} catch (ParseException e) {
-			return "";
+			return "NULL";
 		}
-		return "";
+		return "NULL";
 	}
 
 }
