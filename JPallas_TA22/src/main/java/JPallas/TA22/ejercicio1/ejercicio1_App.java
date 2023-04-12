@@ -7,7 +7,7 @@ public class ejercicio1_App {
 
 	public static void main(String[] args) {
 		MainView view = new MainView();
-		MainViewController vcontroller = new MainViewController();
+		MainViewController vcontroller = new MainViewController(view);
 
 	}
 

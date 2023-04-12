@@ -30,50 +30,16 @@ public class Java_SQL {
 		}
 	}
 
-	// Function to create Databases
-	public static void createDB(String name, Connection conexion) {
+	// Function to use Database
+	public static void useDB(String DB, Connection connection) {
 		try {
-			String query = "CREATE DATABASE " + name + ";";
-			Statement st = conexion.createStatement();
-			st.executeUpdate(query);
-			System.out.println("DB " + name + " created succesfully");
+			String QueryDB = "USE " + DB + ";"; // DB to use
+			Statement stdb = connection.createStatement();
+			stdb.executeUpdate(QueryDB);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
 
-	// Function to create tables with fields
-	public static void createTable(Connection conexion, String DB, String tablename, String tablefields) {
-		try {
-			String QueryDB = "USE " + DB + ";";
-			Statement stdb = conexion.createStatement();
-			stdb.executeUpdate(QueryDB);
-
-			Statement st = conexion.createStatement();
-			String finalQuery = "CREATE TABLE " + tablename + " " + tablefields + ";";
-			st.executeUpdate(finalQuery);
-			System.out.println("Table created succesfully");
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			System.out.println("Error creating table");
-		}
-	}
-
-	// Function to insert values to DB Tables
-	public static void insertData(Connection conexion, String DB, String tablename, String values) {
-		try {
-			String QueryDB = "USE " + DB + ";";
-			Statement stdb = conexion.createStatement();
-			stdb.executeUpdate(QueryDB);
-
-			String finalQuery = "INSERT INTO " + tablename + " " + values + ";";
-			Statement st = conexion.createStatement();
-			st.executeUpdate(finalQuery);
-			System.out.println("Values inserted succesfully");
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			System.out.println("Error when inserting values to table " + tablename);
-		}
 	}
 
 }

@@ -113,6 +113,8 @@ public class Cliente {
 			}
 		} catch (ParseException e) {
 			return "NULL";
+		} catch (NullPointerException e) {
+			return "NULL";
 		}
 		return "NULL";
 	}
