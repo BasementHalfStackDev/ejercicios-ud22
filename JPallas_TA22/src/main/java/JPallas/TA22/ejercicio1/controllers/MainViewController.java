@@ -25,21 +25,36 @@ import JPallas.TA22.ejercicio1.views.MainView;
 public class MainViewController {
 
 	private MainView view;
-	private Cliente model;
 	private ClienteTableModel tableModel;
 
 	public MainViewController(MainView view) {
 		this.view = view;
 		this.tableModel = new ClienteTableModel();
 		view.table.setModel(tableModel);
+		view.btnAdd.addActionListener(btns);
+		view.btnDel.addActionListener(btns);
+		view.btnModify.addActionListener(btns);
+		view.btnReset.addActionListener(btns);
 	}
 
 	ActionListener btns = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
+			if (e.getSource() == view.btnReset) {
+				view.textFieldApellido.setText("");
+				view.textFieldDireccion.setText("");
+				view.textFieldDNI.setText("");
+				view.textFieldFecha.setText("");
+				view.textFieldNombre.setText("");
+			} else if (e.getSource() == view.btnAdd) {
+				// Add to SQL and model
+			} else if (e.getSource() == view.btnDel) {
+				// Del from SQL and model
+			} else if (e.getSource() == view.btnModify) {
+				// Modify with actual values
+			}
+
 		}
-		
+
 	};
 
 }
