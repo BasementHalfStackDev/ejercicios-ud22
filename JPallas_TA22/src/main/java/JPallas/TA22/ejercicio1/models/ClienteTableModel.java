@@ -79,12 +79,12 @@ public class ClienteTableModel extends AbstractTableModel {
 	public String getColumnName(int col) {
 		return columnNames[col];
 	}
-	
-	 @Override
-	    public boolean isCellEditable(int row, int col) {
-	        // Make the first row non-editable
-	        return row > 0;
-	    }
+
+	@Override
+	public boolean isCellEditable(int row, int col) {
+		// Make the first row non-editable
+		return row > 0;
+	}
 
 	public List<Cliente> getClientes() {
 		return clientes;
