@@ -1,12 +1,16 @@
 package JPallas.TA22.ejercicio1.models;
 
 import java.util.Date;
+
+import javax.swing.JOptionPane;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Cliente {
 
 	// Client model with attributes
+	private static int nextId = 1; // AutoIncrement
 	private int id;
 	private String nombre;
 	private String apellido;
@@ -15,14 +19,18 @@ public class Cliente {
 	private String date;
 
 	public Cliente() {
+		this.id = nextId;
+		nextId++;
 	}
 
 	public Cliente(String nombre, String apellido, String direccion, int DNI, String date) {
-		this.nombre = string250CharValidator(nombre);
-		this.apellido = string250CharValidator(apellido);
-		this.direccion = string250CharValidator(direccion);
+		this.id = nextId;
+		this.nombre = strLenValidator(nombre, 250);
+		this.apellido = strLenValidator(apellido, 250);
+		this.direccion = strLenValidator(direccion, 250);
 		this.DNI = DNIValidator(DNI);
 		this.date = dateValidator(date);
+		nextId++;
 	}
 
 	@Override
@@ -62,15 +70,15 @@ public class Cliente {
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = string250CharValidator(nombre);
+		this.nombre = strLenValidator(nombre, 250);
 	}
 
 	public void setApellido(String apellido) {
-		this.apellido = string250CharValidator(apellido);
+		this.apellido = strLenValidator(apellido, 250);
 	}
 
 	public void setDireccion(String direccion) {
-		this.direccion = string250CharValidator(direccion);
+		this.direccion = strLenValidator(direccion, 250);
 	}
 
 	public void setDNI(int DNI) {
@@ -84,8 +92,9 @@ public class Cliente {
 	// Methods
 	// Validators
 	// Validate 250 character varchars
-	public String string250CharValidator(String string) {
-		if (string.length() > 250) {
+	public String strLenValidator(String string, int l) {
+		if (string.length() > l) {
+			JOptionPane.showMessageDialog(null, string + ". This field is longer than " + l + " characters.");
 			return "";
 		}
 		return string;
@@ -95,6 +104,7 @@ public class Cliente {
 	public int DNIValidator(int DNI) {
 		int length = String.valueOf(DNI).length();
 		if (length < 8 || length > 11) {
+			JOptionPane.showMessageDialog(null, "Dni invalid, setting default 0");
 			return 0;
 		}
 		return DNI;
@@ -112,8 +122,10 @@ public class Cliente {
 				return formattedDate;
 			}
 		} catch (ParseException e) {
+			JOptionPane.showMessageDialog(null, "Fecha invalid, setting NULL");
 			return "NULL";
 		} catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Fecha invalid, setting NULL");
 			return "NULL";
 		}
 		return "NULL";
