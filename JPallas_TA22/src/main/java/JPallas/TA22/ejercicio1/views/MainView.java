@@ -13,6 +13,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class MainView extends JFrame {
 
 	// Public variables to be accessed by controller
@@ -27,9 +28,11 @@ public class MainView extends JFrame {
 	public JTextField textFieldDireccion;
 	public JTextField textFieldFecha;
 	public JTextField textFieldSearch;
+	public JTextField textFieldID;
 
 	private JPanel contentPane;
 	private JScrollPane tableScroll;
+	
 
 	/**
 	 * Create the frame.
@@ -54,59 +57,70 @@ public class MainView extends JFrame {
 		// Labels
 		JLabel lblDNI = new JLabel("DNI");
 		lblDNI.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDNI.setBounds(10, 22, 32, 17);
+		lblDNI.setBounds(10, 32, 32, 17);
 		FormPanel.add(lblDNI);
 
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNombre.setBounds(258, 22, 67, 17);
+		lblNombre.setBounds(258, 32, 67, 17);
 		FormPanel.add(lblNombre);
 
 		JLabel lblApellido = new JLabel("Apellido");
 		lblApellido.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblApellido.setBounds(562, 22, 67, 17);
+		lblApellido.setBounds(562, 32, 67, 17);
 		FormPanel.add(lblApellido);
 
 		JLabel lblDireccion = new JLabel("Direccion");
 		lblDireccion.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDireccion.setBounds(10, 74, 67, 17);
+		lblDireccion.setBounds(10, 77, 67, 17);
 		FormPanel.add(lblDireccion);
 
 		JLabel lblFecha = new JLabel("Fecha");
 		lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblFecha.setBounds(545, 74, 67, 17);
+		lblFecha.setBounds(545, 77, 67, 17);
 		FormPanel.add(lblFecha);
+		
+		JLabel lblId = new JLabel("ID");
+		lblId.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblId.setBounds(10, 1, 32, 17);
+		FormPanel.add(lblId);
 
 		// TextFields
 		textFieldDNI = new JTextField();
 		textFieldDNI.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldDNI.setBounds(52, 22, 196, 20);
+		textFieldDNI.setBounds(52, 32, 196, 20);
 		FormPanel.add(textFieldDNI);
 		textFieldDNI.setColumns(10);
 
 		textFieldNombre = new JTextField();
 		textFieldNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textFieldNombre.setColumns(10);
-		textFieldNombre.setBounds(335, 20, 220, 20);
+		textFieldNombre.setBounds(335, 30, 220, 20);
 		FormPanel.add(textFieldNombre);
 
 		textFieldApellido = new JTextField();
 		textFieldApellido.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textFieldApellido.setColumns(10);
-		textFieldApellido.setBounds(639, 20, 309, 20);
+		textFieldApellido.setBounds(639, 30, 309, 20);
 		FormPanel.add(textFieldApellido);
 
 		textFieldDireccion = new JTextField();
 		textFieldDireccion.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textFieldDireccion.setColumns(10);
-		textFieldDireccion.setBounds(87, 74, 448, 20);
+		textFieldDireccion.setBounds(87, 77, 448, 20);
 		FormPanel.add(textFieldDireccion);
 
 		textFieldFecha = new JTextField();
 		textFieldFecha.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textFieldFecha.setColumns(10);
-		textFieldFecha.setBounds(597, 72, 282, 20);
+		textFieldFecha.setBounds(597, 75, 282, 20);
 		FormPanel.add(textFieldFecha);
+		
+		textFieldID = new JTextField();
+		textFieldID.setEditable(false);
+		textFieldID.setBounds(52, 1, 111, 20);
+		FormPanel.add(textFieldID);
+		textFieldID.setColumns(10);
 
 		textFieldSearch = new JTextField(); // Search bar
 		textFieldSearch.setToolTipText("Filter");

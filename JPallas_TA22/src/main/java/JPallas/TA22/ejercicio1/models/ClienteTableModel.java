@@ -13,6 +13,7 @@ import javax.swing.table.AbstractTableModel;
 
 import JPallas.TA22.Java_SQL_Utils.Java_SQL;
 
+@SuppressWarnings("serial")
 public class ClienteTableModel extends AbstractTableModel {
 
 	// Table attributes
@@ -67,8 +68,8 @@ public class ClienteTableModel extends AbstractTableModel {
 
 	@Override
 	public boolean isCellEditable(int row, int col) {
-		// Make the first row non-editable
-		return row > 0;
+		// Make all cells non editable for read-only table
+		return false;
 	}
 
 	public List<Cliente> getClientes() {
@@ -171,8 +172,33 @@ public class ClienteTableModel extends AbstractTableModel {
 		clientes.remove(index);
 	}
 
-	public void updateCliente() {
+	// Function to update Cliente
+	public void updateCliente(Cliente cliente) {
+		// Make connection, use DB and create query
+		connection = Java_SQL.conectarDB();
+		Java_SQL.useDB(DB, connection);
+		String query = "UPDATE " + table + " SET nombre=?, apellido=?, direccion=?, dni=?, fecha=? WHERE id=?;";
+		try {
+			// Make statement to update cliente with fields
+			PreparedStatement pStatement = connection.prepareStatement(query);
+			pStatement.setString(1, cliente.getNombre());
+			pStatement.setString(2, cliente.getApellido());
+			pStatement.setString(3, cliente.getDireccion());
+			pStatement.setInt(4, cliente.getDNI());
+			pStatement.setString(5, cliente.getDate());
+			pStatement.setInt(6, cliente.getId());
+
+			// Execute statement and close if success
+			pStatement.executeUpdate();
+			JOptionPane.showMessageDialog(null, "User modified successfully", "Success!",
+					JOptionPane.INFORMATION_MESSAGE);
+			pStatement.close();
+			connection.close();
+			updateTable();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
-
 }

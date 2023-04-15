@@ -6,24 +6,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.ListModel;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-import com.mysql.cj.jdbc.result.ResultSetMetaData;
-
-import JPallas.TA22.Java_SQL_Utils.Java_SQL;
 import JPallas.TA22.ejercicio1.models.Cliente;
 import JPallas.TA22.ejercicio1.models.ClienteTableModel;
 import JPallas.TA22.ejercicio1.views.MainView;
@@ -57,7 +44,6 @@ public class MainViewController {
 			if (e.getSource() == view.btnReset) {
 				resetTextFields();
 			}
-
 			// If button is add, adds client info to DB and table
 			if (e.getSource() == view.btnAdd) {
 				Cliente cliente = new Cliente();
@@ -74,7 +60,6 @@ public class MainViewController {
 				// Updates table data
 				tableModel.fireTableDataChanged();
 			}
-
 			// If button is del, delete selected client
 			if (e.getSource() == view.btnDel) {
 				// Delete selected client
@@ -82,6 +67,29 @@ public class MainViewController {
 				// Resets text fields
 				resetTextFields();
 				// Update table data
+				tableModel.fireTableDataChanged();
+			}
+			// If button is modify, modify selected client
+			if (e.getSource() == view.btnModify) {
+				// Check if the row is selected
+				if (view.table.getSelectedRow() == 0 || view.table.getSelectedRow() == -1) {
+					JOptionPane.showMessageDialog(null, "No user Selected", "Error!", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+				Cliente cliente = new Cliente();
+				// Sets info from selected Cliente
+				cliente.setId(Integer.parseInt(view.textFieldID.getText()));
+				cliente.setNombre(view.textFieldNombre.getText());
+				cliente.setApellido(view.textFieldApellido.getText());
+				cliente.setDireccion(view.textFieldDireccion.getText());
+				cliente.setDNI(Integer.parseInt(view.textFieldDNI.getText()));
+				cliente.setDate(view.textFieldFecha.getText());
+
+				// Modifies cliente in DB and table model
+				tableModel.updateCliente(cliente);
+				// Resets text fields
+				resetTextFields();
+				// Updates table data
 				tableModel.fireTableDataChanged();
 			}
 		}
@@ -92,6 +100,7 @@ public class MainViewController {
 		public void mouseClicked(MouseEvent e) {
 			// Gets clicked selected row and puts values in text fields
 			int row = view.table.getSelectedRow();
+			view.textFieldID.setText((String) tableModel.getValueAt(row, 0).toString());
 			view.textFieldNombre.setText((String) tableModel.getValueAt(row, 1));
 			view.textFieldApellido.setText((String) tableModel.getValueAt(row, 2));
 			view.textFieldDireccion.setText((String) tableModel.getValueAt(row, 3));
@@ -127,8 +136,9 @@ public class MainViewController {
 		}
 	};
 
-	// Function to reset textFields
+	// Function to reset textFields and table selection
 	public void resetTextFields() {
+		view.table.clearSelection();
 		view.textFieldApellido.setText("");
 		view.textFieldDireccion.setText("");
 		view.textFieldDNI.setText("");
