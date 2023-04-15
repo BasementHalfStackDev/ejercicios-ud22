@@ -100,12 +100,14 @@ public class MainViewController {
 		public void mouseClicked(MouseEvent e) {
 			// Gets clicked selected row and puts values in text fields
 			int row = view.table.getSelectedRow();
-			view.textFieldID.setText((String) tableModel.getValueAt(row, 0).toString());
-			view.textFieldNombre.setText((String) tableModel.getValueAt(row, 1));
-			view.textFieldApellido.setText((String) tableModel.getValueAt(row, 2));
-			view.textFieldDireccion.setText((String) tableModel.getValueAt(row, 3));
-			view.textFieldDNI.setText((String) tableModel.getValueAt(row, 4).toString());
-			view.textFieldFecha.setText((String) tableModel.getValueAt(row, 5));
+			// Convert row to model row to select the correct row when Filtering
+			int modelRow = view.table.convertRowIndexToModel(row);
+			view.textFieldID.setText((String) tableModel.getValueAt(modelRow, 0).toString());
+			view.textFieldNombre.setText((String) tableModel.getValueAt(modelRow, 1));
+			view.textFieldApellido.setText((String) tableModel.getValueAt(modelRow, 2));
+			view.textFieldDireccion.setText((String) tableModel.getValueAt(modelRow, 3));
+			view.textFieldDNI.setText((String) tableModel.getValueAt(modelRow, 4).toString());
+			view.textFieldFecha.setText((String) tableModel.getValueAt(modelRow, 5));
 		}
 
 		@Override
