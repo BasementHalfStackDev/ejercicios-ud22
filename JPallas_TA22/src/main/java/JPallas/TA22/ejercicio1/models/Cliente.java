@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 public class Cliente {
 
 	// Client model with attributes
-	private static int nextId = 1; // AutoIncrement
 	private int id;
 	private String nombre;
 	private String apellido;
@@ -18,19 +17,18 @@ public class Cliente {
 	private int DNI;
 	private String date;
 
+	// Default constructor
 	public Cliente() {
-		this.id = nextId;
-		nextId++;
 	}
 
-	public Cliente(String nombre, String apellido, String direccion, int DNI, String date) {
-		this.id = nextId;
-		this.nombre = strLenValidator(nombre, 250);
-		this.apellido = strLenValidator(apellido, 250);
-		this.direccion = strLenValidator(direccion, 250);
-		this.DNI = DNIValidator(DNI);
-		this.date = dateValidator(date);
-		nextId++;
+	// Constructor with attributes
+	public Cliente(int id, String nombre, String apellido, String direccion, int DNI, String date) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.direccion = direccion;
+		this.DNI = DNI;
+		this.date = date;
 	}
 
 	@Override
@@ -91,11 +89,11 @@ public class Cliente {
 
 	// Methods
 	// Validators
-	// Validate 250 character varchars
+	// Validate x character varchars
 	public String strLenValidator(String string, int l) {
 		if (string.length() > l) {
 			JOptionPane.showMessageDialog(null, string + ". This field is longer than " + l + " characters.");
-			return "";
+			return ""; // If invalid set empty string
 		}
 		return string;
 	}
@@ -105,12 +103,12 @@ public class Cliente {
 		int length = String.valueOf(DNI).length();
 		if (length < 8 || length > 11) {
 			JOptionPane.showMessageDialog(null, "Dni invalid, setting default 0");
-			return 0;
+			return 0; // If invalid set 0
 		}
 		return DNI;
 	}
 
-	// Validate date format is valid
+	// Validate date format is valid and returns as String
 	public String dateValidator(String date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.setLenient(false);
@@ -121,14 +119,15 @@ public class Cliente {
 			if (formattedDate.equals(date)) {
 				return formattedDate;
 			}
-		} catch (ParseException e) {
-			JOptionPane.showMessageDialog(null, "Fecha invalid, setting NULL");
-			return "NULL";
+		} catch (ParseException e) {  // If invalid set null
+			JOptionPane.showMessageDialog(null, "Fecha invalid format yyyy-mm-dd, setting NULL");
+			return null;
 		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(null, "Fecha invalid, setting NULL");
-			return "NULL";
+			JOptionPane.showMessageDialog(null, "Fecha invalid format yyyy-mm-dd, setting NULL");
+			return null;
 		}
-		return "NULL";
+		JOptionPane.showMessageDialog(null, "Fecha invalid format yyyy-mm-dd, setting NULL");
+		return null;
 	}
 
 }

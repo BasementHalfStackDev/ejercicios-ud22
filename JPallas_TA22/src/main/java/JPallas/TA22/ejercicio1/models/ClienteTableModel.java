@@ -14,36 +14,20 @@ import javax.swing.table.AbstractTableModel;
 import JPallas.TA22.Java_SQL_Utils.Java_SQL;
 
 public class ClienteTableModel extends AbstractTableModel {
+
+	// Table attributes
 	private List<Cliente> clientes;
 	private String[] columnNames = { "ID", "Nombre", "Apellido", "Direccion", "DNI", "Fecha" };
 	private String DB = "ud22_1";
 	private Connection connection;
 	private String table = "cliente";
 
+	// Generate table based on SQL data
 	public ClienteTableModel() {
-		this.clientes = new ArrayList<Cliente>();
-		connection = Java_SQL.conectarDB();
-		Java_SQL.useDB(DB, connection);
-		try {
-
-			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM " + table + ";");
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String nombre = rs.getString("nombre");
-				String apellido = rs.getString("apellido");
-				String direccion = rs.getString("direccion");
-				int dni = rs.getInt("dni");
-				String fecha = rs.getString("fecha");
-				Cliente cliente = new Cliente(nombre, apellido, direccion, dni, fecha);
-				clientes.add(cliente);
-			}
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		updateTable();
 	}
 
+	// Functions
 	@Override
 	public int getRowCount() {
 		return clientes.size();
@@ -103,38 +87,88 @@ public class ClienteTableModel extends AbstractTableModel {
 		this.columnNames = columnNames;
 	}
 
+	// Function to display table data from SQL table
 	public void updateTable() {
-
-	}
-
-	public void addClienteToDB(Cliente cliente) {
-		clientes.add(cliente);
-
+		this.clientes = new ArrayList<Cliente>();
 		connection = Java_SQL.conectarDB();
 		Java_SQL.useDB(DB, connection);
-		String query = "INSERT INTO " + table + " (id, nombre, apellido, direccion, dni, fecha) "
-				+ "VALUES (?,?,?,?,?,?);";
-
 		try {
-			PreparedStatement pStatement = connection.prepareStatement(query);
-			pStatement.setInt(1, cliente.getId());
-			pStatement.setString(2, cliente.getNombre());
-			pStatement.setString(3, cliente.getApellido());
-			pStatement.setString(4, cliente.getDireccion());
-			pStatement.setInt(5, cliente.getDNI());
-			pStatement.setString(6, cliente.getDate());
 
-			pStatement.executeUpdate();
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM " + table + ";");
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String nombre = rs.getString("nombre");
+				String apellido = rs.getString("apellido");
+				String direccion = rs.getString("direccion");
+				int dni = rs.getInt("dni");
+				String fecha = rs.getString("fecha");
+				Cliente cliente = new Cliente(id, nombre, apellido, direccion, dni, fecha);
+				clientes.add(cliente);
+			}
+			statement.close();
+			rs.close();
 			connection.close();
-
-			JOptionPane.showMessageDialog(null, "Cliente added successfully");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void deleteCliente() {
+	// Function to add given Cliente to DB
+	public void addClienteToDB(Cliente cliente) {
+		// Make connection, use DB and create query
+		connection = Java_SQL.conectarDB();
+		Java_SQL.useDB(DB, connection);
+		String query = "INSERT INTO " + table + " (nombre, apellido, direccion, dni, fecha) " + "VALUES (?,?,?,?,?);";
 
+		try {
+			// Make statement with cliente fields
+			PreparedStatement pStatement = connection.prepareStatement(query);
+			pStatement.setString(1, cliente.getNombre());
+			pStatement.setString(2, cliente.getApellido());
+			pStatement.setString(3, cliente.getDireccion());
+			pStatement.setInt(4, cliente.getDNI());
+			pStatement.setString(5, cliente.getDate());
+
+			// Execute statement and close if success
+			pStatement.executeUpdate();
+			JOptionPane.showMessageDialog(null, "User added successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
+			pStatement.close();
+			connection.close();
+			updateTable();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Function to delete cliente from DB by row index
+	public void deleteCliente(int index) {
+		// Get cliente from index
+		Cliente cliente = clientes.get(index);
+
+		// Get ID
+		int clienteID = cliente.getId();
+
+		// Remove from SQL
+		connection = Java_SQL.conectarDB();
+		Java_SQL.useDB(DB, connection);
+		String query = "DELETE FROM " + table + " WHERE id = " + clienteID + ";";
+
+		try {
+			Statement statement = connection.createStatement();
+
+			statement.executeUpdate(query);
+			JOptionPane.showMessageDialog(null, "User deleted successfully", "Success!",
+					JOptionPane.INFORMATION_MESSAGE);
+
+			statement.close();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		// Remove from table
+		clientes.remove(index);
 	}
 
 	public void updateCliente() {

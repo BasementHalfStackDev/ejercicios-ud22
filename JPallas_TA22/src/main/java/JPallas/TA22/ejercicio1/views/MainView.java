@@ -15,7 +15,7 @@ import java.awt.Color;
 
 public class MainView extends JFrame {
 
-	// Public variables to be accessed
+	// Public variables to be accessed by controller
 	public JButton btnAdd;
 	public JButton btnDel;
 	public JButton btnReset;
@@ -26,6 +26,7 @@ public class MainView extends JFrame {
 	public JTextField textFieldApellido;
 	public JTextField textFieldDireccion;
 	public JTextField textFieldFecha;
+	public JTextField textFieldSearch;
 
 	private JPanel contentPane;
 	private JScrollPane tableScroll;
@@ -107,10 +108,16 @@ public class MainView extends JFrame {
 		textFieldFecha.setBounds(597, 72, 282, 20);
 		FormPanel.add(textFieldFecha);
 
+		textFieldSearch = new JTextField(); // Search bar
+		textFieldSearch.setToolTipText("Filter");
+		textFieldSearch.setBounds(10, 210, 227, 20);
+		contentPane.add(textFieldSearch);
+		textFieldSearch.setColumns(10);
+
 		// Panel for buttons
 		JPanel ButtonPanel = new JPanel();
 		ButtonPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		ButtonPanel.setBounds(10, 146, 958, 73);
+		ButtonPanel.setBounds(10, 146, 958, 53);
 		contentPane.add(ButtonPanel);
 		ButtonPanel.setLayout(new GridLayout(1, 0, 0, 0));
 
