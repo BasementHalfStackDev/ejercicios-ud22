@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import JPallas.TA22.ejercicio3.views.MainWindow;
+import JPallas.TA22.ejercicio3.views.ScientistView;
 
 public class MainWindowController {
 
@@ -28,6 +29,8 @@ public class MainWindowController {
 			if (e.getSource() == view.btnScientists) {
 				if (scientistWindowsOpen == 0) {
 					scientistWindowsOpen++;
+					ScientistView sview = new ScientistView();
+					ScientistViewController svController = new ScientistViewController(sview);
 
 				}
 			}

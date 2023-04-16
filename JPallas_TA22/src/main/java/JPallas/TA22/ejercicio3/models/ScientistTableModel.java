@@ -133,7 +133,7 @@ public class ScientistTableModel extends AbstractTableModel {
 		// Remove from SQL
 		connection = Java_SQL.conectarDB();
 		Java_SQL.useDB(DB, connection);
-		String query = "DELETE FROM " + table + " WHERE dni = " + scientistID + ";";
+		String query = "DELETE FROM " + table + " WHERE dni = '" + scientistID + "';";
 
 		try {
 			Statement statement = connection.createStatement();

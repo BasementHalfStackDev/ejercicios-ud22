@@ -84,7 +84,7 @@ public class ScientistViewController {
 			// If button is modify, modify selected Scientist
 			if (e.getSource() == view.btnModify) {
 				// Check if the row is selected
-				if (view.table.getSelectedRow() == 0 || view.table.getSelectedRow() == -1) {
+				if (view.table.getSelectedRow() == -1) {
 					JOptionPane.showMessageDialog(null, "No scientist Selected", "Error!",
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
