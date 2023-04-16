@@ -137,7 +137,7 @@ public class ProjectTableModel extends AbstractTableModel {
 		// Remove from SQL
 		connection = Java_SQL.conectarDB();
 		Java_SQL.useDB(DB, connection);
-		String query = "DELETE FROM " + table + " WHERE id = " + projectID + ";";
+		String query = "DELETE FROM " + table + " WHERE id = '" + projectID + "';";
 
 		try {
 			Statement statement = connection.createStatement();
@@ -156,7 +156,7 @@ public class ProjectTableModel extends AbstractTableModel {
 	}
 
 	// Function to update Project
-	public void updateProject(Project project) {
+	public void updateProject(Project project, String pastID) {
 		// Make connection, use DB and create query
 		connection = Java_SQL.conectarDB();
 		Java_SQL.useDB(DB, connection);
@@ -167,7 +167,7 @@ public class ProjectTableModel extends AbstractTableModel {
 			pStatement.setString(1, project.getId());
 			pStatement.setString(2, project.getName());
 			pStatement.setInt(3, project.getHours());
-			pStatement.setString(4, project.getId());
+			pStatement.setString(4, pastID);
 
 			// Execute statement and close if success
 			pStatement.executeUpdate();

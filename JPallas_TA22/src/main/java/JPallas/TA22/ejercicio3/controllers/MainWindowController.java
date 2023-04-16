@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import JPallas.TA22.ejercicio3.views.MainWindow;
+import JPallas.TA22.ejercicio3.views.ProjectView;
 import JPallas.TA22.ejercicio3.views.ScientistView;
 
 public class MainWindowController {
@@ -31,15 +32,14 @@ public class MainWindowController {
 					scientistWindowsOpen++;
 					ScientistView sview = new ScientistView();
 					ScientistViewController svController = new ScientistViewController(sview);
-
 				}
 			}
 			if (e.getSource() == view.btnProjects) {
 				if (projectWindowsOpen == 0) {
 					projectWindowsOpen++;
-
+					ProjectView pview = new ProjectView();
+					ProjectViewController pvController = new ProjectViewController(pview);
 				}
-
 			}
 			if (e.getSource() == view.btnAssignations) {
 				if (assignationWindowsOpen == 0) {

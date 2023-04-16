@@ -152,7 +152,7 @@ public class ScientistTableModel extends AbstractTableModel {
 	}
 
 	// Function to update Scientist
-	public void updateScientist(Scientist scientist) {
+	public void updateScientist(Scientist scientist, String pastDNI) {
 		// Make connection, use DB and create query
 		connection = Java_SQL.conectarDB();
 		Java_SQL.useDB(DB, connection);
@@ -162,7 +162,7 @@ public class ScientistTableModel extends AbstractTableModel {
 			PreparedStatement pStatement = connection.prepareStatement(query);
 			pStatement.setString(1, scientist.getDNI());
 			pStatement.setString(2, scientist.getNamSurnam());
-			pStatement.setString(3, scientist.getDNI());
+			pStatement.setString(3, pastDNI);
 
 			// Execute statement and close if success
 			pStatement.executeUpdate();

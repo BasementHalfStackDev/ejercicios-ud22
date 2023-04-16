@@ -14,20 +14,20 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-import JPallas.TA22.ejercicio3.models.Scientist;
-import JPallas.TA22.ejercicio3.models.ScientistTableModel;
-import JPallas.TA22.ejercicio3.views.ScientistView;
+import JPallas.TA22.ejercicio3.models.Project;
+import JPallas.TA22.ejercicio3.models.ProjectTableModel;
+import JPallas.TA22.ejercicio3.views.ProjectView;
 
-public class ScientistViewController {
+public class ProjectViewController {
 
 	// Attributes
-	private ScientistView view; // View
-	private ScientistTableModel tableModel; // Table Model
-	TableRowSorter<ScientistTableModel> sorter; // Sorter
+	private ProjectView view; // View
+	private ProjectTableModel tableModel; // Table Model
+	TableRowSorter<ProjectTableModel> sorter; // Sorter
 
-	public ScientistViewController(ScientistView view) {
+	public ProjectViewController(ProjectView view) {
 		this.view = view;
-		this.tableModel = new ScientistTableModel(); // Create Model
+		this.tableModel = new ProjectTableModel(); // Create Model
 		view.table.setModel(tableModel); // Set model to view table
 		view.table.addMouseListener(tblListener); // Add Mouse listener to table
 		// Action listener to buttons
@@ -49,24 +49,40 @@ public class ScientistViewController {
 			if (e.getSource() == view.btnReset) {
 				resetTextFields();
 			}
-			// If button is add, adds scientist info to DB and table
+			// If button is add, adds Project info to DB and table
 			if (e.getSource() == view.btnAdd) {
-				Scientist scientist = new Scientist();
+				Project project = new Project();
 
-				if (!Scientist.dniValidator(view.textFieldDNI.getText())) { // Check if not valid
+				if (!Project.idCheck(view.textFieldID.getText())) { // Check if not valid
 					return;
 				}
 
-				scientist.setDNI(view.textFieldDNI.getText());
+				project.setId(view.textFieldID.getText());
 
-				if (!Scientist.strLenCheck(view.textFieldNamSurnam.getText(), 255)) { // Check if not valid
+				if (!Project.strLenCheck(view.textFieldName.getText(), 255)) { // Check if not valid
 					return;
 				}
 
-				scientist.setNamSurnam(view.textFieldNamSurnam.getText());
+				project.setName(view.textFieldName.getText());
 
-				// Adds scientist to DB and table model
-				tableModel.addScientistToDB(scientist);
+				// Parse Hours to integer and catch exceptions
+				int h = 0;
+				try {
+					h = Integer.parseInt(view.textFieldHours.getText());
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Invalid hours! Add numbers only!", "Error!",
+							JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+
+				if (!Project.hourCheck(h)) { // Check if valid
+					return;
+				}
+
+				project.setHours(h);
+
+				// Adds project to DB and table model
+				tableModel.addProjectToDB(project);
 				// Resets text fields
 				resetTextFields();
 				// Updates table data
@@ -76,13 +92,13 @@ public class ScientistViewController {
 			if (e.getSource() == view.btnDel) {
 				// Delete selected scientist
 				int modelRow = view.table.convertRowIndexToModel(view.table.getSelectedRow());
-				tableModel.deleteScientist(modelRow);
+				tableModel.deleteProject(modelRow);
 				// Resets text fields
 				resetTextFields();
 				// Update table data
 				tableModel.fireTableDataChanged();
 			}
-			// If button is modify, modify selected Scientist
+			// If button is modify, modify selected Project
 			if (e.getSource() == view.btnModify) {
 				// Check if the row is selected
 				if (view.table.getSelectedRow() == -1) {
@@ -90,26 +106,41 @@ public class ScientistViewController {
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
-				Scientist scientist = new Scientist();
-				// Sets info from selected scientist
-				if (!Scientist.dniValidator(view.textFieldDNI.getText())) { // Check if not valid
+				Project project = new Project();
+				if (!Project.idCheck(view.textFieldID.getText())) { // Check if not valid
 					return;
 				}
 
-				scientist.setDNI(view.textFieldDNI.getText());
+				project.setId(view.textFieldID.getText());
 
-				if (!Scientist.strLenCheck(view.textFieldNamSurnam.getText(), 255)) { // Check if not valid
+				if (!Project.strLenCheck(view.textFieldName.getText(), 255)) { // Check if not valid
 					return;
 				}
 
-				scientist.setNamSurnam(view.textFieldNamSurnam.getText());
+				project.setName(view.textFieldName.getText());
+
+				int h = 0;
+
+				try {
+					h = Integer.parseInt(view.textFieldHours.getText());
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Invalid hours! Add numbers only!", "Error!",
+							JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+
+				if (!Project.hourCheck(h)) {
+					return;
+				}
+
+				project.setHours(h);
 
 				// Get past ID before modifying
 				int modelRow = view.table.convertRowIndexToModel(view.table.getSelectedRow());
-				String pastDNI = (String) tableModel.getValueAt(modelRow, 0);
+				String pastID = (String) tableModel.getValueAt(modelRow, 0);
 
 				// Modifies scientist in DB and table model
-				tableModel.updateScientist(scientist, pastDNI);
+				tableModel.updateProject(project, pastID);
 				// Resets text fields
 				resetTextFields();
 				// Updates table data
@@ -125,8 +156,9 @@ public class ScientistViewController {
 			int row = view.table.getSelectedRow();
 			// Convert row to model row to select the correct row when Filtering
 			int modelRow = view.table.convertRowIndexToModel(row);
-			view.textFieldDNI.setText((String) tableModel.getValueAt(modelRow, 0));
-			view.textFieldNamSurnam.setText((String) tableModel.getValueAt(modelRow, 1));
+			view.textFieldID.setText((String) tableModel.getValueAt(modelRow, 0));
+			view.textFieldName.setText((String) tableModel.getValueAt(modelRow, 1));
+			view.textFieldHours.setText((String) tableModel.getValueAt(modelRow, 2).toString());
 		}
 
 		@Override
@@ -165,7 +197,7 @@ public class ScientistViewController {
 
 		// Once closing the view, set instances to 0
 		public void windowClosing(WindowEvent e) {
-			MainWindowController.scientistWindowsOpen = 0;
+			MainWindowController.projectWindowsOpen = 0;
 		}
 
 		public void windowClosed(WindowEvent e) {
@@ -188,8 +220,9 @@ public class ScientistViewController {
 	// Function to reset textFields and table selection
 	public void resetTextFields() {
 		view.table.clearSelection();
-		view.textFieldDNI.setText("");
-		view.textFieldNamSurnam.setText("");
+		view.textFieldID.setText("");
+		view.textFieldName.setText("");
+		view.textFieldHours.setText("");
 	}
 
 }

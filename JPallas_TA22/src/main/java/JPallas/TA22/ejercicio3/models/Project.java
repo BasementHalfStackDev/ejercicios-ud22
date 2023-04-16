@@ -10,11 +10,11 @@ public class Project {
 	private int hours;
 
 	// Default Constructor
-	Project() {
+	public Project() {
 	}
 
 	// Constructor with fields
-	Project(String id, String name, int hours) {
+	public Project(String id, String name, int hours) {
 		this.id = id;
 		this.name = name;
 		this.hours = hours;
@@ -48,7 +48,7 @@ public class Project {
 
 	// Functions
 	// Function to check correct id length
-	public boolean idCheck(String id) {
+	public static boolean idCheck(String id) {
 		if (id.length() == 4) {
 			return true;
 		}
@@ -57,13 +57,22 @@ public class Project {
 
 	// String length validator. Should've made a class for validators but no time
 	// :')
-	public boolean strLenCheck(String string, int l) {
+	public static boolean strLenCheck(String string, int l) {
 		if (string.length() > l || string.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Invalid String length");
 			return false;
 		} else {
 			return true;
 		}
+	}
+	
+	// Check hours are more than 1
+	public static boolean hourCheck(int h) {
+		if (h < 1) {
+			JOptionPane.showMessageDialog(null, "Invalid Inserted hours.");
+			return false;
+		}
+		return true;
 	}
 
 }
