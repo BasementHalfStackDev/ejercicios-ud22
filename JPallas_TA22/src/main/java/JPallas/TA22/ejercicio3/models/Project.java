@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio3.models;
 
 import javax.swing.JOptionPane;
@@ -65,7 +69,7 @@ public class Project {
 			return true;
 		}
 	}
-	
+
 	// Check hours are more than 1
 	public static boolean hourCheck(int h) {
 		if (h < 1) {

@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio2;
 
 import java.awt.EventQueue;

@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio1.views;
 
 import javax.swing.JFrame;
@@ -32,7 +36,6 @@ public class MainView extends JFrame {
 
 	private JPanel contentPane;
 	private JScrollPane tableScroll;
-	
 
 	/**
 	 * Create the frame.
@@ -79,7 +82,7 @@ public class MainView extends JFrame {
 		lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblFecha.setBounds(545, 77, 67, 17);
 		FormPanel.add(lblFecha);
-		
+
 		JLabel lblId = new JLabel("ID");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblId.setBounds(10, 1, 32, 17);
@@ -115,7 +118,7 @@ public class MainView extends JFrame {
 		textFieldFecha.setColumns(10);
 		textFieldFecha.setBounds(597, 75, 282, 20);
 		FormPanel.add(textFieldFecha);
-		
+
 		textFieldID = new JTextField();
 		textFieldID.setEditable(false);
 		textFieldID.setBounds(52, 1, 111, 20);

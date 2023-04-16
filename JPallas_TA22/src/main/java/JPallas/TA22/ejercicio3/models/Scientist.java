@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio3.models;
 
 import javax.swing.JOptionPane;

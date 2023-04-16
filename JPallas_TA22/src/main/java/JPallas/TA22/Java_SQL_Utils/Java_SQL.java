@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.Java_SQL_Utils;
 
 import java.sql.Connection;

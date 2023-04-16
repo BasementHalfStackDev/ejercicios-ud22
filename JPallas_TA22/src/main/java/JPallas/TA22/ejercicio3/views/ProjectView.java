@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio3.views;
 
 import javax.swing.JFrame;
@@ -29,7 +33,6 @@ public class ProjectView extends JFrame {
 
 	private JPanel contentPane;
 	private JScrollPane tableScroll;
-	
 
 	/**
 	 * Create the frame.
@@ -74,13 +77,13 @@ public class ProjectView extends JFrame {
 		textFieldName.setColumns(10);
 		textFieldName.setBounds(122, 80, 826, 20);
 		FormPanel.add(textFieldName);
-		
+
 		textFieldHours = new JTextField();
 		textFieldHours.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		textFieldHours.setColumns(10);
 		textFieldHours.setBounds(311, 27, 154, 20);
 		FormPanel.add(textFieldHours);
-		
+
 		JLabel lblHours = new JLabel("Hours");
 		lblHours.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblHours.setBounds(256, 28, 45, 17);

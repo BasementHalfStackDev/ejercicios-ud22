@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio3.views;
 
 import javax.swing.JFrame;
@@ -44,7 +48,7 @@ public class MainWindow extends JFrame {
 		btnProjects.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnProjects.setBounds(56, 144, 217, 61);
 		contentPane.add(btnProjects);
-		
+
 		btnAssignations = new JButton("Assignations");
 		btnAssignations.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnAssignations.setBounds(56, 216, 217, 61);

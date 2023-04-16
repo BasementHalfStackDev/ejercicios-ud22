@@ -1,10 +1,13 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio3;
 
 import java.awt.EventQueue;
 
 import JPallas.TA22.ejercicio3.controllers.MainWindowController;
 import JPallas.TA22.ejercicio3.views.MainWindow;
-
 
 public class ejercicio3_App {
 

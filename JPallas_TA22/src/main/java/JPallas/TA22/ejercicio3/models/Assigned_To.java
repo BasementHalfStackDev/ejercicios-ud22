@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio3.models;
 
 public class Assigned_To {
@@ -15,7 +19,7 @@ public class Assigned_To {
 		this.scientist_id = s_id;
 		this.project_id = p_id;
 	}
-	
+
 	// Getters
 	public String getScientist_id() {
 		return scientist_id;
@@ -33,9 +37,5 @@ public class Assigned_To {
 	public void setProject_id(String project_id) {
 		this.project_id = project_id;
 	}
-	
-	
-	
-	
 
 }

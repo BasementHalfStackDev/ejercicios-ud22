@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio1.models;
 
 import java.util.Date;
@@ -119,7 +123,7 @@ public class Cliente {
 			if (formattedDate.equals(date)) {
 				return formattedDate;
 			}
-		} catch (ParseException e) {  // If invalid set null
+		} catch (ParseException e) { // If invalid set null
 			JOptionPane.showMessageDialog(null, "Fecha invalid format yyyy-mm-dd, setting NULL");
 			return null;
 		} catch (NullPointerException e) {

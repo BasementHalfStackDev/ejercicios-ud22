@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio2.views;
 
 import javax.swing.JFrame;
@@ -30,8 +34,6 @@ public class VideosView extends JFrame {
 
 	private JPanel contentPane;
 	private JScrollPane tableScroll;
-	
-	
 
 	/**
 	 * Create the frame.
@@ -68,7 +70,7 @@ public class VideosView extends JFrame {
 		lblCli_id.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblCli_id.setBounds(704, 44, 73, 17);
 		FormPanel.add(lblCli_id);
-		
+
 		JLabel lblId = new JLabel("ID");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblId.setBounds(10, 11, 32, 17);
@@ -92,7 +94,7 @@ public class VideosView extends JFrame {
 		textFieldCli_id.setColumns(10);
 		textFieldCli_id.setBounds(787, 42, 161, 20);
 		FormPanel.add(textFieldCli_id);
-		
+
 		textFieldID = new JTextField();
 		textFieldID.setEditable(false);
 		textFieldID.setBounds(52, 11, 111, 20);

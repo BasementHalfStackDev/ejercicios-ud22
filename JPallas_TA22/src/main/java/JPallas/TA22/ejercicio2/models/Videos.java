@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio2.models;
 
 public class Videos {
@@ -54,7 +58,5 @@ public class Videos {
 	public void setCli_id(int cli_id) {
 		this.cli_id = cli_id;
 	}
-	
-	
 
 }

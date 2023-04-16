@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio3.views;
 
 import javax.swing.JFrame;
@@ -28,7 +32,6 @@ public class AssignationsView extends JFrame {
 
 	private JPanel contentPane;
 	private JScrollPane tableScroll;
-	
 
 	/**
 	 * Create the frame.

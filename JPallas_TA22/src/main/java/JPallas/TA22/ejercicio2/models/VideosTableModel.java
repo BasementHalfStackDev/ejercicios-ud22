@@ -1,3 +1,7 @@
+/**
+ * @author BasementHalfStackDev/Josep Maria Pallas Batalla
+ */
+
 package JPallas.TA22.ejercicio2.models;
 
 import java.sql.Connection;
@@ -27,7 +31,7 @@ public class VideosTableModel extends AbstractTableModel {
 	public VideosTableModel() {
 		updateTable();
 	}
-	
+
 	// Functions
 	public int getRowCount() {
 		return videos.size();
