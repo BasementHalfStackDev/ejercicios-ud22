@@ -1,4 +1,4 @@
-package JPallas.TA22.ejercicio1.models;
+package JPallas.TA22.ejercicio2.models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -61,12 +61,10 @@ public class ClienteTableModel extends AbstractTableModel {
 		}
 	}
 
-	@Override
 	public String getColumnName(int col) {
 		return columnNames[col];
 	}
 
-	@Override
 	public boolean isCellEditable(int row, int col) {
 		// Make all cells non editable for read-only table
 		return false;
