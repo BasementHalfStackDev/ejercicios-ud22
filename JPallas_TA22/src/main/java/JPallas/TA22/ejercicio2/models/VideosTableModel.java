@@ -136,7 +136,7 @@ public class VideosTableModel {
 			Statement statement = connection.createStatement();
 
 			statement.executeUpdate(query);
-			JOptionPane.showMessageDialog(null, "User deleted successfully", "Success!",
+			JOptionPane.showMessageDialog(null, "Video deleted successfully", "Success!",
 					JOptionPane.INFORMATION_MESSAGE);
 
 			statement.close();
@@ -148,32 +148,31 @@ public class VideosTableModel {
 		}
 	}
 
-	// Function to update Cliente
-	public void updateCliente(Cliente cliente) {
-			// Make connection, use DB and create query
-			connection = Java_SQL.conectarDB();
-			Java_SQL.useDB(DB, connection);
-			String query = "UPDATE " + table + " SET nombre=?, apellido=?, direccion=?, dni=?, fecha=? WHERE id=?;";
-			try {
-				// Make statement to update cliente with fields
-				PreparedStatement pStatement = connection.prepareStatement(query);
-				pStatement.setString(1, cliente.getNombre());
-				pStatement.setString(2, cliente.getApellido());
-				pStatement.setString(3, cliente.getDireccion());
-				pStatement.setInt(4, cliente.getDNI());
-				pStatement.setString(5, cliente.getDate());
-				pStatement.setInt(6, cliente.getId());
+	// Function to update Video
+	public void updateVideo(Videos video) {
+		// Make connection, use DB and create query
+		connection = Java_SQL.conectarDB();
+		Java_SQL.useDB(DB, connection);
+		String query = "UPDATE " + table + " SET title=?, director=?, cli_id=? WHERE id=?;";
+		try {
+			// Make statement to update cliente with fields
+			PreparedStatement pStatement = connection.prepareStatement(query);
+			pStatement.setString(1, video.getTitle());
+			pStatement.setString(2, video.getDirector());
+			pStatement.setInt(3, video.getCli_id());
+			pStatement.setInt(6, video.getId());
 
-				// Execute statement and close if success
-				pStatement.executeUpdate();
-				JOptionPane.showMessageDialog(null, "User modified successfully", "Success!",
-						JOptionPane.INFORMATION_MESSAGE);
-				pStatement.close();
-				connection.close();
-				updateTable();
+			// Execute statement and close if success
+			pStatement.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Video modified successfully", "Success!",
+					JOptionPane.INFORMATION_MESSAGE);
+			pStatement.close();
+			connection.close();
+			updateTable();
 
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

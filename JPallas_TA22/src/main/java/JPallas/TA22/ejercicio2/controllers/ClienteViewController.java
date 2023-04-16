@@ -11,18 +11,19 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-import JPallas.TA22.ejercicio1.models.Cliente;
-import JPallas.TA22.ejercicio1.models.ClienteTableModel;
-import JPallas.TA22.ejercicio1.views.MainView;
+import JPallas.TA22.ejercicio2.models.Cliente;
+import JPallas.TA22.ejercicio2.models.ClienteTableModel;
+import JPallas.TA22.ejercicio2.views.ClienteView;
+import JPallas.TA22.ejercicio2.views.MainWindow;
 
 public class ClienteViewController {
 
 	// Attributes
-	private MainView view; // View
+	private ClienteView view; // View
 	private ClienteTableModel tableModel; // Table Model
 	TableRowSorter<ClienteTableModel> sorter; // Sorter
 
-	public ClienteViewController(MainView view) {
+	public ClienteViewController(ClienteView view) {
 		this.view = view;
 		this.tableModel = new ClienteTableModel(); // Create Model
 		view.table.setModel(tableModel); // Set model to view table
@@ -32,6 +33,7 @@ public class ClienteViewController {
 		view.btnDel.addActionListener(btns);
 		view.btnModify.addActionListener(btns);
 		view.btnReset.addActionListener(btns);
+		view.btnBack.addActionListener(btns);
 		sorter = new TableRowSorter<>(tableModel); // Create sorter based on model
 		view.table.setRowSorter(sorter); // Add sorter to table
 		view.textFieldSearch.addKeyListener(searchBar); // Add key listener to searchbar
@@ -43,6 +45,12 @@ public class ClienteViewController {
 			// If button is reset, resets text fields
 			if (e.getSource() == view.btnReset) {
 				resetTextFields();
+			}
+			// If button is back, go back to table selection
+			if (e.getSource() == view.btnBack) {
+				view.setVisible(false);
+				MainWindow window = new MainWindow();
+				MainWindowController wController = new MainWindowController(window);
 			}
 			// If button is add, adds client info to DB and table
 			if (e.getSource() == view.btnAdd) {

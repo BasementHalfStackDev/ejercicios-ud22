@@ -14,7 +14,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 
 @SuppressWarnings("serial")
-public class ClienteView extends JFrame {
+public class VideosView extends JFrame {
 
 	// Public variables to be accessed by controller
 	public JButton btnAdd;
@@ -22,11 +22,9 @@ public class ClienteView extends JFrame {
 	public JButton btnReset;
 	public JButton btnModify;
 	public JTable table;
-	public JTextField textFieldDNI;
-	public JTextField textFieldNombre;
-	public JTextField textFieldApellido;
-	public JTextField textFieldDireccion;
-	public JTextField textFieldFecha;
+	public JTextField textFieldTitle;
+	public JTextField textFieldDirector;
+	public JTextField textFieldCli_id;
 	public JTextField textFieldSearch;
 	public JTextField textFieldID;
 	public JButton btnBack;
@@ -39,8 +37,8 @@ public class ClienteView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ClienteView() {
-		setTitle("Cliente Form");
+	public VideosView() {
+		setTitle("Videos Form");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 994, 675);
 		contentPane = new JPanel();
@@ -57,70 +55,48 @@ public class ClienteView extends JFrame {
 		FormPanel.setLayout(null);
 
 		// Labels
-		JLabel lblDNI = new JLabel("DNI");
-		lblDNI.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDNI.setBounds(10, 32, 32, 17);
-		FormPanel.add(lblDNI);
+		JLabel lblTitle = new JLabel("Title");
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTitle.setBounds(10, 44, 32, 17);
+		FormPanel.add(lblTitle);
 
-		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNombre.setBounds(258, 32, 67, 17);
-		FormPanel.add(lblNombre);
+		JLabel lblDirector = new JLabel("Director");
+		lblDirector.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblDirector.setBounds(10, 84, 67, 17);
+		FormPanel.add(lblDirector);
 
-		JLabel lblApellido = new JLabel("Apellido");
-		lblApellido.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblApellido.setBounds(562, 32, 67, 17);
-		FormPanel.add(lblApellido);
-
-		JLabel lblDireccion = new JLabel("Direccion");
-		lblDireccion.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDireccion.setBounds(10, 77, 67, 17);
-		FormPanel.add(lblDireccion);
-
-		JLabel lblFecha = new JLabel("Fecha");
-		lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblFecha.setBounds(545, 77, 67, 17);
-		FormPanel.add(lblFecha);
+		JLabel lblCli_id = new JLabel("Cliente Id");
+		lblCli_id.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblCli_id.setBounds(704, 44, 73, 17);
+		FormPanel.add(lblCli_id);
 		
 		JLabel lblId = new JLabel("ID");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblId.setBounds(10, 1, 32, 17);
+		lblId.setBounds(10, 11, 32, 17);
 		FormPanel.add(lblId);
 
 		// TextFields
-		textFieldDNI = new JTextField();
-		textFieldDNI.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldDNI.setBounds(52, 32, 196, 20);
-		FormPanel.add(textFieldDNI);
-		textFieldDNI.setColumns(10);
+		textFieldTitle = new JTextField();
+		textFieldTitle.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldTitle.setBounds(52, 44, 642, 20);
+		FormPanel.add(textFieldTitle);
+		textFieldTitle.setColumns(10);
 
-		textFieldNombre = new JTextField();
-		textFieldNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldNombre.setColumns(10);
-		textFieldNombre.setBounds(335, 30, 220, 20);
-		FormPanel.add(textFieldNombre);
+		textFieldDirector = new JTextField();
+		textFieldDirector.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldDirector.setColumns(10);
+		textFieldDirector.setBounds(76, 82, 618, 20);
+		FormPanel.add(textFieldDirector);
 
-		textFieldApellido = new JTextField();
-		textFieldApellido.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldApellido.setColumns(10);
-		textFieldApellido.setBounds(639, 30, 309, 20);
-		FormPanel.add(textFieldApellido);
-
-		textFieldDireccion = new JTextField();
-		textFieldDireccion.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldDireccion.setColumns(10);
-		textFieldDireccion.setBounds(87, 77, 448, 20);
-		FormPanel.add(textFieldDireccion);
-
-		textFieldFecha = new JTextField();
-		textFieldFecha.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldFecha.setColumns(10);
-		textFieldFecha.setBounds(597, 75, 282, 20);
-		FormPanel.add(textFieldFecha);
+		textFieldCli_id = new JTextField();
+		textFieldCli_id.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldCli_id.setColumns(10);
+		textFieldCli_id.setBounds(787, 42, 161, 20);
+		FormPanel.add(textFieldCli_id);
 		
 		textFieldID = new JTextField();
 		textFieldID.setEditable(false);
-		textFieldID.setBounds(52, 1, 111, 20);
+		textFieldID.setBounds(52, 11, 111, 20);
 		FormPanel.add(textFieldID);
 		textFieldID.setColumns(10);
 

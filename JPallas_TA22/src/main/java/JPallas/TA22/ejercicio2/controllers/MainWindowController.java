@@ -1,0 +1,38 @@
+package JPallas.TA22.ejercicio2.controllers;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import JPallas.TA22.ejercicio2.views.ClienteView;
+import JPallas.TA22.ejercicio2.views.MainWindow;
+
+public class MainWindowController {
+
+	// View
+	private MainWindow view;
+
+	// Controller with view
+	public MainWindowController(MainWindow view) {
+		this.view = view;
+		view.btnClientes.addActionListener(btns);
+		view.btnVideos.addActionListener(btns);
+	}
+
+	ActionListener btns = new ActionListener() {
+
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == view.btnClientes) {
+				view.setVisible(false);
+				ClienteView cview = new ClienteView();
+				ClienteViewController cvController = new ClienteViewController(cview);
+			}
+
+			if (e.getSource() == view.btnVideos) {
+				view.setVisible(false);
+			}
+
+		}
+
+	};
+
+}
