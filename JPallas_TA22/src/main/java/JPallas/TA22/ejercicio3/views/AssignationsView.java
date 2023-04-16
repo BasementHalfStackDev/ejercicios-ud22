@@ -14,7 +14,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 
 @SuppressWarnings("serial")
-public class ScientistView extends JFrame {
+public class AssignationsView extends JFrame {
 
 	// Public variables to be accessed by controller
 	public JButton btnAdd;
@@ -22,8 +22,8 @@ public class ScientistView extends JFrame {
 	public JButton btnReset;
 	public JButton btnModify;
 	public JTable table;
-	public JTextField textFieldDNI;
-	public JTextField textFieldNamSurnam;
+	public JTextField textFieldScientist;
+	public JTextField textFieldProject;
 	public JTextField textFieldSearch;
 
 	private JPanel contentPane;
@@ -34,8 +34,8 @@ public class ScientistView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ScientistView() {
-		setTitle("Scientist Form");
+	public AssignationsView() {
+		setTitle("Assignations Form");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 994, 675);
 		contentPane = new JPanel();
@@ -52,28 +52,28 @@ public class ScientistView extends JFrame {
 		FormPanel.setLayout(null);
 
 		// Labels
-		JLabel lblDNI = new JLabel("DNI");
-		lblDNI.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDNI.setBounds(10, 29, 32, 17);
-		FormPanel.add(lblDNI);
+		JLabel lblScientist = new JLabel("Scientist");
+		lblScientist.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblScientist.setBounds(10, 29, 64, 17);
+		FormPanel.add(lblScientist);
 
-		JLabel lblNamSurnam = new JLabel("Name and Surname");
-		lblNamSurnam.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNamSurnam.setBounds(10, 82, 147, 17);
-		FormPanel.add(lblNamSurnam);
+		JLabel lblProject = new JLabel("Project");
+		lblProject.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblProject.setBounds(10, 82, 64, 17);
+		FormPanel.add(lblProject);
 
 		// TextFields
-		textFieldDNI = new JTextField();
-		textFieldDNI.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldDNI.setBounds(52, 27, 194, 20);
-		FormPanel.add(textFieldDNI);
-		textFieldDNI.setColumns(10);
+		textFieldScientist = new JTextField();
+		textFieldScientist.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldScientist.setBounds(84, 27, 241, 20);
+		FormPanel.add(textFieldScientist);
+		textFieldScientist.setColumns(10);
 
-		textFieldNamSurnam = new JTextField();
-		textFieldNamSurnam.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldNamSurnam.setColumns(10);
-		textFieldNamSurnam.setBounds(167, 80, 781, 20);
-		FormPanel.add(textFieldNamSurnam);
+		textFieldProject = new JTextField();
+		textFieldProject.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textFieldProject.setColumns(10);
+		textFieldProject.setBounds(84, 80, 241, 20);
+		FormPanel.add(textFieldProject);
 
 		textFieldSearch = new JTextField(); // Search bar
 		textFieldSearch.setToolTipText("Filter");
