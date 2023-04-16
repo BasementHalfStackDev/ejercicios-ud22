@@ -223,6 +223,7 @@ public class ProjectViewController {
 		view.textFieldID.setText("");
 		view.textFieldName.setText("");
 		view.textFieldHours.setText("");
+		view.textFieldSearch.setText("");
 	}
 
 }

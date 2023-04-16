@@ -14,20 +14,22 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
+import JPallas.TA22.ejercicio3.models.AssignedToTableModel;
+import JPallas.TA22.ejercicio3.models.Assigned_To;
+import JPallas.TA22.ejercicio3.models.Project;
 import JPallas.TA22.ejercicio3.models.Scientist;
-import JPallas.TA22.ejercicio3.models.ScientistTableModel;
-import JPallas.TA22.ejercicio3.views.ScientistView;
+import JPallas.TA22.ejercicio3.views.AssignationsView;
 
-public class ScientistViewController {
+public class AssignationsViewController {
 
 	// Attributes
-	private ScientistView view; // View
-	private ScientistTableModel tableModel; // Table Model
-	TableRowSorter<ScientistTableModel> sorter; // Sorter
+	private AssignationsView view; // View
+	private AssignedToTableModel tableModel; // Table Model
+	TableRowSorter<AssignedToTableModel> sorter; // Sorter
 
-	public ScientistViewController(ScientistView view) {
+	public AssignationsViewController(AssignationsView view) {
 		this.view = view;
-		this.tableModel = new ScientistTableModel(); // Create Model
+		this.tableModel = new AssignedToTableModel(); // Create Model
 		view.table.setModel(tableModel); // Set model to view table
 		view.table.addMouseListener(tblListener); // Add Mouse listener to table
 		// Action listener to buttons
@@ -49,40 +51,40 @@ public class ScientistViewController {
 			if (e.getSource() == view.btnReset) {
 				resetTextFields();
 			}
-			// If button is add, adds scientist info to DB and table
+			// If button is add, adds Assignation info to DB and table
 			if (e.getSource() == view.btnAdd) {
-				Scientist scientist = new Scientist();
+				Assigned_To assigned_to = new Assigned_To();
 
-				if (!Scientist.dniValidator(view.textFieldDNI.getText())) { // Check if not valid
+				if (!Scientist.dniValidator(view.textFieldScientist.getText())) { // Check if not valid
 					return;
 				}
 
-				scientist.setDNI(view.textFieldDNI.getText());
+				assigned_to.setScientist_id(view.textFieldScientist.getText());
 
-				if (!Scientist.strLenCheck(view.textFieldNamSurnam.getText(), 255)) { // Check if not valid
+				if (!Project.idCheck(view.textFieldProject.getText())) { // Check if not valid
 					return;
 				}
 
-				scientist.setNamSurnam(view.textFieldNamSurnam.getText());
+				assigned_to.setProject_id(view.textFieldProject.getText());
 
-				// Adds scientist to DB and table model
-				tableModel.addScientistToDB(scientist);
+				// Adds assignation to DB and table model
+				tableModel.addAssignationToDB(assigned_to);
 				// Resets text fields
 				resetTextFields();
 				// Updates table data
 				tableModel.fireTableDataChanged();
 			}
-			// If button is del, delete selected Scientist
+			// If button is del, delete selected Assignation
 			if (e.getSource() == view.btnDel) {
-				// Delete selected scientist
+				// Delete selected Assignation
 				int modelRow = view.table.convertRowIndexToModel(view.table.getSelectedRow());
-				tableModel.deleteScientist(modelRow);
+				tableModel.deleteAssignation(modelRow);
 				// Resets text fields
 				resetTextFields();
 				// Update table data
 				tableModel.fireTableDataChanged();
 			}
-			// If button is modify, modify selected Scientist
+			// If button is modify, modify selected Assignation
 			if (e.getSource() == view.btnModify) {
 				// Check if the row is selected
 				if (view.table.getSelectedRow() == -1) {
@@ -90,26 +92,28 @@ public class ScientistViewController {
 							JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
-				Scientist scientist = new Scientist();
-				// Sets info from selected scientist
-				if (!Scientist.dniValidator(view.textFieldDNI.getText())) { // Check if not valid
+
+				Assigned_To assigned_to = new Assigned_To();
+
+				if (!Scientist.dniValidator(view.textFieldScientist.getText())) { // Check if not valid
 					return;
 				}
 
-				scientist.setDNI(view.textFieldDNI.getText());
+				assigned_to.setScientist_id(view.textFieldScientist.getText());
 
-				if (!Scientist.strLenCheck(view.textFieldNamSurnam.getText(), 255)) { // Check if not valid
+				if (!Project.idCheck(view.textFieldProject.getText())) { // Check if not valid
 					return;
 				}
 
-				scientist.setNamSurnam(view.textFieldNamSurnam.getText());
+				assigned_to.setProject_id(view.textFieldProject.getText());
 
-				// Get past ID before modifying
+				// Get past scientist and project before modifying
 				int modelRow = view.table.convertRowIndexToModel(view.table.getSelectedRow());
-				String pastDNI = (String) tableModel.getValueAt(modelRow, 0);
+				String pastScientist = (String) tableModel.getValueAt(modelRow, 0);
+				String pastProject = (String) tableModel.getValueAt(modelRow, 1);
 
-				// Modifies scientist in DB and table model
-				tableModel.updateScientist(scientist, pastDNI);
+				// Modifies Assignation in DB and table model
+				tableModel.updateAssignation(assigned_to, pastScientist, pastProject);
 				// Resets text fields
 				resetTextFields();
 				// Updates table data
@@ -125,8 +129,8 @@ public class ScientistViewController {
 			int row = view.table.getSelectedRow();
 			// Convert row to model row to select the correct row when Filtering
 			int modelRow = view.table.convertRowIndexToModel(row);
-			view.textFieldDNI.setText((String) tableModel.getValueAt(modelRow, 0));
-			view.textFieldNamSurnam.setText((String) tableModel.getValueAt(modelRow, 1));
+			view.textFieldScientist.setText((String) tableModel.getValueAt(modelRow, 0));
+			view.textFieldProject.setText((String) tableModel.getValueAt(modelRow, 1));
 		}
 
 		@Override
@@ -165,7 +169,7 @@ public class ScientistViewController {
 
 		// Once closing the view, set instances to 0
 		public void windowClosing(WindowEvent e) {
-			MainWindowController.scientistWindowsOpen = 0;
+			MainWindowController.assignationWindowsOpen = 0;
 		}
 
 		public void windowClosed(WindowEvent e) {
@@ -188,8 +192,8 @@ public class ScientistViewController {
 	// Function to reset textFields and table selection
 	public void resetTextFields() {
 		view.table.clearSelection();
-		view.textFieldDNI.setText("");
-		view.textFieldNamSurnam.setText("");
+		view.textFieldProject.setText("");
+		view.textFieldScientist.setText("");
 		view.textFieldSearch.setText("");
 	}
 

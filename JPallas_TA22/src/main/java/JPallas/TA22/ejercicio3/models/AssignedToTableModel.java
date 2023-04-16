@@ -98,7 +98,7 @@ public class AssignedToTableModel extends AbstractTableModel {
 	}
 
 	// Function to add given Assignation to DB
-	public void addProjectToDB(Assigned_To assigned_to) {
+	public void addAssignationToDB(Assigned_To assigned_to) {
 		// Make connection, use DB and create query
 		connection = Java_SQL.conectarDB();
 		Java_SQL.useDB(DB, connection);
@@ -123,7 +123,7 @@ public class AssignedToTableModel extends AbstractTableModel {
 	}
 
 	// Function to delete Assignation from DB by row index
-	public void deleteProject(int index) {
+	public void deleteAssignation(int index) {
 		// Get Assignation from index
 		Assigned_To assigned_to = assignations.get(index);
 
@@ -134,8 +134,8 @@ public class AssignedToTableModel extends AbstractTableModel {
 		// Remove from SQL
 		connection = Java_SQL.conectarDB();
 		Java_SQL.useDB(DB, connection);
-		String query = "DELETE FROM " + table + " WHERE scientist = " + scientist_id + " AND project = " + project_id
-				+ ";";
+		String query = "DELETE FROM " + table + " WHERE scientist = '" + scientist_id + "' AND project = '" + project_id
+				+ "';";
 
 		try {
 			Statement statement = connection.createStatement();
@@ -153,23 +153,23 @@ public class AssignedToTableModel extends AbstractTableModel {
 		}
 	}
 
-	// Function to update Project
-	public void updateProject(Project project) {
+	// Function to update Assignation
+	public void updateAssignation(Assigned_To assigned_to, String pastDNI, String pastID) {
 		// Make connection, use DB and create query
 		connection = Java_SQL.conectarDB();
 		Java_SQL.useDB(DB, connection);
-		String query = "UPDATE " + table + " SET id=?, name=?, hours=? WHERE id=?;";
+		String query = "UPDATE " + table + " SET scientist=?, project=? WHERE scientist= ? AND project = ?;";
 		try {
 			// Make statement to update project with fields
 			PreparedStatement pStatement = connection.prepareStatement(query);
-			pStatement.setString(1, project.getId());
-			pStatement.setString(2, project.getName());
-			pStatement.setInt(3, project.getHours());
-			pStatement.setString(4, project.getId());
+			pStatement.setString(1, assigned_to.getScientist_id());
+			pStatement.setString(2, assigned_to.getProject_id());
+			pStatement.setString(3, pastDNI);
+			pStatement.setString(4, pastID);
 
 			// Execute statement and close if success
 			pStatement.executeUpdate();
-			JOptionPane.showMessageDialog(null, "Project modified successfully", "Success!",
+			JOptionPane.showMessageDialog(null, "Assignation modified successfully", "Success!",
 					JOptionPane.INFORMATION_MESSAGE);
 			pStatement.close();
 			connection.close();

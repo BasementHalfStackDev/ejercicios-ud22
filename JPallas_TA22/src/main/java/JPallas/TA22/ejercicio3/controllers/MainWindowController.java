@@ -3,6 +3,7 @@ package JPallas.TA22.ejercicio3.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import JPallas.TA22.ejercicio3.views.AssignationsView;
 import JPallas.TA22.ejercicio3.views.MainWindow;
 import JPallas.TA22.ejercicio3.views.ProjectView;
 import JPallas.TA22.ejercicio3.views.ScientistView;
@@ -24,7 +25,6 @@ public class MainWindowController {
 	}
 
 	ActionListener btns = new ActionListener() {
-
 		@SuppressWarnings("unused")
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == view.btnScientists) {
@@ -44,12 +44,10 @@ public class MainWindowController {
 			if (e.getSource() == view.btnAssignations) {
 				if (assignationWindowsOpen == 0) {
 					assignationWindowsOpen++;
-
+					AssignationsView aview = new AssignationsView();
+					AssignationsViewController avController = new AssignationsViewController(aview);
 				}
 			}
-
 		}
-
 	};
-
 }
