@@ -5,6 +5,7 @@ import JPallas.TA22.ejercicio1.views.MainView;
 
 public class ejercicio1_App {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		// Initialise program and controller
 		MainView view = new MainView();
