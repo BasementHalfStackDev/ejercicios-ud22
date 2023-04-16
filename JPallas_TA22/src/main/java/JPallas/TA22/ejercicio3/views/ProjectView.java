@@ -30,8 +30,6 @@ public class ProjectView extends JFrame {
 	private JPanel contentPane;
 	private JScrollPane tableScroll;
 	
-	
-	
 
 	/**
 	 * Create the frame.

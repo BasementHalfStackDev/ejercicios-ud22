@@ -9,11 +9,11 @@ public class Scientist {
 	private String namSurnam;
 
 	// Default Constructor
-	Scientist() {
+	public Scientist() {
 	}
 
 	// Constructor with attributes
-	Scientist(String DNI, String namSurnam) {
+	public Scientist(String DNI, String namSurnam) {
 		this.DNI = DNI;
 		this.namSurnam = namSurnam;
 	}
@@ -65,7 +65,7 @@ public class Scientist {
 
 	// String length validator. Should've made a class for validators but no time
 	// :')
-	public boolean strLenCheck(String string, int l) {
+	public static boolean strLenCheck(String string, int l) {
 		if (string.length() > l || string.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Invalid String length");
 			return false;

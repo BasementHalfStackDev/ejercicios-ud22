@@ -29,7 +29,6 @@ public class ScientistView extends JFrame {
 	private JPanel contentPane;
 	private JScrollPane tableScroll;
 	
-	
 
 	/**
 	 * Create the frame.
