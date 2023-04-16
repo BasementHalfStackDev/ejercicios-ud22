@@ -90,7 +90,7 @@ public class Cliente {
 	// Methods
 	// Validators
 	// Validate x character varchars
-	public String strLenValidator(String string, int l) {
+	public static String strLenValidator(String string, int l) {
 		if (string.length() > l) {
 			JOptionPane.showMessageDialog(null, string + ". This field is longer than " + l + " characters.");
 			return ""; // If invalid set empty string
