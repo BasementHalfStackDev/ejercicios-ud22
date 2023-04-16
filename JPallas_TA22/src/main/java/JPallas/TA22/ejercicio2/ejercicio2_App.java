@@ -9,6 +9,7 @@ public class ejercicio2_App {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@SuppressWarnings("unused")
 			public void run() {
 				try {
 					MainWindow frame = new MainWindow();

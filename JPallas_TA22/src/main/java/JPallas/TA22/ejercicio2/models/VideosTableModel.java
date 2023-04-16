@@ -105,7 +105,7 @@ public class VideosTableModel extends AbstractTableModel {
 	}
 
 	// Function to add given Video to DB
-	public void addClienteToDB(Videos video) {
+	public void addVideoToDB(Videos video) {
 		// Make connection, use DB and create query
 		connection = Java_SQL.conectarDB();
 		Java_SQL.useDB(DB, connection);
@@ -131,7 +131,7 @@ public class VideosTableModel extends AbstractTableModel {
 	}
 
 	// Function to delete Video from DB by row index
-	public void deleteCliente(int index) {
+	public void deleteVideo(int index) {
 		// Get Video from index
 		Videos video = videos.get(index);
 
@@ -171,7 +171,7 @@ public class VideosTableModel extends AbstractTableModel {
 			pStatement.setString(1, video.getTitle());
 			pStatement.setString(2, video.getDirector());
 			pStatement.setInt(3, video.getCli_id());
-			pStatement.setInt(6, video.getId());
+			pStatement.setInt(4, video.getId());
 
 			// Execute statement and close if success
 			pStatement.executeUpdate();

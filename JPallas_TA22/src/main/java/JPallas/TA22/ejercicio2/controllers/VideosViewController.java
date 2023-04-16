@@ -6,15 +6,16 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-import JPallas.TA22.ejercicio2.models.Cliente;
-import JPallas.TA22.ejercicio2.models.ClienteTableModel;
+import JPallas.TA22.ejercicio2.models.Videos;
 import JPallas.TA22.ejercicio2.models.VideosTableModel;
-import JPallas.TA22.ejercicio2.views.MainWindow;
 import JPallas.TA22.ejercicio2.views.VideosView;
 
 public class VideosViewController {
@@ -33,10 +34,11 @@ public class VideosViewController {
 		view.btnDel.addActionListener(btns);
 		view.btnModify.addActionListener(btns);
 		view.btnReset.addActionListener(btns);
-		view.btnBack.addActionListener(btns);
 		sorter = new TableRowSorter<>(tableModel); // Create sorter based on model
 		view.table.setRowSorter(sorter); // Add sorter to table
 		view.textFieldSearch.addKeyListener(searchBar); // Add key listener to searchbar
+		view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Set Default close operation
+		view.addWindowListener(window); // Window Listener to reset instances on close
 	}
 
 	// Buttons action listener
@@ -46,55 +48,45 @@ public class VideosViewController {
 			if (e.getSource() == view.btnReset) {
 				resetTextFields();
 			}
-			// If button is back, go back to table selection
-			if (e.getSource() == view.btnBack) {
-				view.setVisible(false);
-				MainWindow window = new MainWindow();
-				MainWindowController wController = new MainWindowController(window);
-			}
-			// If button is add, adds client info to DB and table
+			// If button is add, adds video info to DB and table
 			if (e.getSource() == view.btnAdd) {
-				Cliente cliente = new Cliente();
-				cliente.setNombre(view.textFieldNombre.getText());
-				cliente.setApellido(view.textFieldApellido.getText());
-				cliente.setDireccion(view.textFieldDireccion.getText());
-				cliente.setDNI(Integer.parseInt(view.textFieldDNI.getText()));
-				cliente.setDate(view.textFieldFecha.getText());
+				Videos video = new Videos();
+				video.setTitle(view.textFieldTitle.getText());
+				video.setDirector(view.textFieldDirector.getText());
+				video.setCli_id(Integer.parseInt(view.textFieldCli_id.getText()));
 
-				// Adds cliente to DB and table model
-				tableModel.addClienteToDB(cliente);
+				// Adds video to DB and table model
+				tableModel.addVideoToDB(video);
 				// Resets text fields
 				resetTextFields();
 				// Updates table data
 				tableModel.fireTableDataChanged();
 			}
-			// If button is del, delete selected client
+			// If button is Del, delete selected video
 			if (e.getSource() == view.btnDel) {
-				// Delete selected client
-				tableModel.deleteCliente(view.table.getSelectedRow());
+				// Delete selected video
+				tableModel.deleteVideo(view.table.getSelectedRow());
 				// Resets text fields
 				resetTextFields();
 				// Update table data
 				tableModel.fireTableDataChanged();
 			}
-			// If button is modify, modify selected client
+			// If button is modify, modify selected video
 			if (e.getSource() == view.btnModify) {
 				// Check if the row is selected
 				if (view.table.getSelectedRow() == 0 || view.table.getSelectedRow() == -1) {
-					JOptionPane.showMessageDialog(null, "No user Selected", "Error!", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "No Video Selected", "Error!", JOptionPane.INFORMATION_MESSAGE);
 					return;
 				}
-				Cliente cliente = new Cliente();
-				// Sets info from selected Cliente
-				cliente.setId(Integer.parseInt(view.textFieldID.getText()));
-				cliente.setNombre(view.textFieldNombre.getText());
-				cliente.setApellido(view.textFieldApellido.getText());
-				cliente.setDireccion(view.textFieldDireccion.getText());
-				cliente.setDNI(Integer.parseInt(view.textFieldDNI.getText()));
-				cliente.setDate(view.textFieldFecha.getText());
+				Videos video = new Videos();
+				// Sets info from selected Video
+				video.setId(Integer.parseInt(view.textFieldID.getText()));
+				video.setTitle(view.textFieldTitle.getText());
+				video.setDirector(view.textFieldDirector.getText());
+				video.setCli_id(Integer.parseInt(view.textFieldCli_id.getText()));
 
-				// Modifies cliente in DB and table model
-				tableModel.updateCliente(cliente);
+				// Modifies Video in DB and table model
+				tableModel.updateVideo(video);
 				// Resets text fields
 				resetTextFields();
 				// Updates table data
@@ -111,11 +103,9 @@ public class VideosViewController {
 			// Convert row to model row to select the correct row when Filtering
 			int modelRow = view.table.convertRowIndexToModel(row);
 			view.textFieldID.setText((String) tableModel.getValueAt(modelRow, 0).toString());
-			view.textFieldNombre.setText((String) tableModel.getValueAt(modelRow, 1));
-			view.textFieldApellido.setText((String) tableModel.getValueAt(modelRow, 2));
-			view.textFieldDireccion.setText((String) tableModel.getValueAt(modelRow, 3));
-			view.textFieldDNI.setText((String) tableModel.getValueAt(modelRow, 4).toString());
-			view.textFieldFecha.setText((String) tableModel.getValueAt(modelRow, 5));
+			view.textFieldTitle.setText((String) tableModel.getValueAt(modelRow, 1));
+			view.textFieldDirector.setText((String) tableModel.getValueAt(modelRow, 2));
+			view.textFieldCli_id.setText((String) tableModel.getValueAt(modelRow, 3).toString());
 		}
 
 		@Override
@@ -146,12 +136,41 @@ public class VideosViewController {
 		}
 	};
 
+	// Window Listener
+	WindowListener window = new WindowListener() {
+
+		public void windowOpened(WindowEvent e) {
+		}
+
+		// Once closing the view, set instances to 0
+		public void windowClosing(WindowEvent e) {
+			MainWindowController.videosWindowsOpen = 0;
+		}
+
+		public void windowClosed(WindowEvent e) {
+		}
+
+		public void windowIconified(WindowEvent e) {
+		}
+
+		public void windowDeiconified(WindowEvent e) {
+		}
+
+		public void windowActivated(WindowEvent e) {
+		}
+
+		public void windowDeactivated(WindowEvent e) {
+		}
+
+	};
+
 	// Function to reset textFields and table selection
 	public void resetTextFields() {
 		view.table.clearSelection();
 		view.textFieldTitle.setText("");
 		view.textFieldDirector.setText("");
 		view.textFieldCli_id.setText("");
+		view.textFieldID.setText("");
 	}
 
 }

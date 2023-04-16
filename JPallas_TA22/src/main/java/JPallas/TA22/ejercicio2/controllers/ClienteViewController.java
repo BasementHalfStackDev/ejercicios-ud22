@@ -6,7 +6,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
@@ -14,7 +17,6 @@ import javax.swing.table.TableRowSorter;
 import JPallas.TA22.ejercicio2.models.Cliente;
 import JPallas.TA22.ejercicio2.models.ClienteTableModel;
 import JPallas.TA22.ejercicio2.views.ClienteView;
-import JPallas.TA22.ejercicio2.views.MainWindow;
 
 public class ClienteViewController {
 
@@ -33,10 +35,11 @@ public class ClienteViewController {
 		view.btnDel.addActionListener(btns);
 		view.btnModify.addActionListener(btns);
 		view.btnReset.addActionListener(btns);
-		view.btnBack.addActionListener(btns);
 		sorter = new TableRowSorter<>(tableModel); // Create sorter based on model
 		view.table.setRowSorter(sorter); // Add sorter to table
 		view.textFieldSearch.addKeyListener(searchBar); // Add key listener to searchbar
+		view.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Set Default close operation
+		view.addWindowListener(window); // Window Listener to reset instances on close
 	}
 
 	// Buttons action listener
@@ -45,12 +48,6 @@ public class ClienteViewController {
 			// If button is reset, resets text fields
 			if (e.getSource() == view.btnReset) {
 				resetTextFields();
-			}
-			// If button is back, go back to table selection
-			if (e.getSource() == view.btnBack) {
-				view.setVisible(false);
-				MainWindow window = new MainWindow();
-				MainWindowController wController = new MainWindowController(window);
 			}
 			// If button is add, adds client info to DB and table
 			if (e.getSource() == view.btnAdd) {
@@ -144,6 +141,34 @@ public class ClienteViewController {
 			String query = view.textFieldSearch.getText();
 			sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query));
 		}
+	};
+
+	// Window Listener
+	WindowListener window = new WindowListener() {
+
+		public void windowOpened(WindowEvent e) {
+		}
+
+		// Once closing the view, set instances to 0
+		public void windowClosing(WindowEvent e) {
+			MainWindowController.clienteWindowsOpen = 0;
+		}
+
+		public void windowClosed(WindowEvent e) {
+		}
+
+		public void windowIconified(WindowEvent e) {
+		}
+
+		public void windowDeiconified(WindowEvent e) {
+		}
+
+		public void windowActivated(WindowEvent e) {
+		}
+
+		public void windowDeactivated(WindowEvent e) {
+		}
+
 	};
 
 	// Function to reset textFields and table selection

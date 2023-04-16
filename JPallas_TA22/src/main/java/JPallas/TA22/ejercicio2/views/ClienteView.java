@@ -29,7 +29,6 @@ public class ClienteView extends JFrame {
 	public JTextField textFieldFecha;
 	public JTextField textFieldSearch;
 	public JTextField textFieldID;
-	public JButton btnBack;
 
 	private JPanel contentPane;
 	private JScrollPane tableScroll;
@@ -152,10 +151,6 @@ public class ClienteView extends JFrame {
 		btnReset = new JButton("Reset");
 		btnReset.setFont(new Font("Tahoma", Font.BOLD, 20));
 		ButtonPanel.add(btnReset);
-		
-		btnBack = new JButton("Back");
-		btnBack.setFont(new Font("Tahoma", Font.BOLD, 20));
-		ButtonPanel.add(btnBack);
 
 		// Panel for table
 		JPanel TablePanel = new JPanel();
