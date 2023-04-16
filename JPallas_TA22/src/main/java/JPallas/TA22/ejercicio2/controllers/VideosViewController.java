@@ -13,19 +13,19 @@ import javax.swing.table.TableRowSorter;
 
 import JPallas.TA22.ejercicio2.models.Cliente;
 import JPallas.TA22.ejercicio2.models.ClienteTableModel;
-import JPallas.TA22.ejercicio2.views.ClienteView;
+import JPallas.TA22.ejercicio2.models.VideosTableModel;
 import JPallas.TA22.ejercicio2.views.MainWindow;
+import JPallas.TA22.ejercicio2.views.VideosView;
 
-public class ClienteViewController {
-
+public class VideosViewController {
 	// Attributes
-	private ClienteView view; // View
-	private ClienteTableModel tableModel; // Table Model
-	TableRowSorter<ClienteTableModel> sorter; // Sorter
+	private VideosView view; // View
+	private VideosTableModel tableModel; // Table Model
+	TableRowSorter<VideosTableModel> sorter; // Sorter
 
-	public ClienteViewController(ClienteView view) {
+	public VideosViewController(VideosView view) {
 		this.view = view;
-		this.tableModel = new ClienteTableModel(); // Create Model
+		this.tableModel = new VideosTableModel(); // Create Model
 		view.table.setModel(tableModel); // Set model to view table
 		view.table.addMouseListener(tblListener); // Add Mouse listener to table
 		// Action listener to buttons
@@ -149,12 +149,9 @@ public class ClienteViewController {
 	// Function to reset textFields and table selection
 	public void resetTextFields() {
 		view.table.clearSelection();
-		view.textFieldApellido.setText("");
-		view.textFieldDireccion.setText("");
-		view.textFieldDNI.setText("");
-		view.textFieldFecha.setText("");
-		view.textFieldNombre.setText("");
-		view.textFieldID.setText("");
+		view.textFieldTitle.setText("");
+		view.textFieldDirector.setText("");
+		view.textFieldCli_id.setText("");
 	}
 
 }

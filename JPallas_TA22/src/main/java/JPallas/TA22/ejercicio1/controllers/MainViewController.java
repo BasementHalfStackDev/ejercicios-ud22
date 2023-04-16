@@ -146,6 +146,7 @@ public class MainViewController {
 		view.textFieldDNI.setText("");
 		view.textFieldFecha.setText("");
 		view.textFieldNombre.setText("");
+		view.textFieldID.setText("");
 	}
 
 }

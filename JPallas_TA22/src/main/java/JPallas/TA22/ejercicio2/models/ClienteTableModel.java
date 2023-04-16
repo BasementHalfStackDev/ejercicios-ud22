@@ -29,17 +29,14 @@ public class ClienteTableModel extends AbstractTableModel {
 	}
 
 	// Functions
-	@Override
 	public int getRowCount() {
 		return clientes.size();
 	}
 
-	@Override
 	public int getColumnCount() {
 		return columnNames.length;
 	}
 
-	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Cliente cliente = clientes.get(rowIndex);
 

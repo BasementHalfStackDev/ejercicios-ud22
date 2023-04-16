@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.AbstractTableModel;
 
 import JPallas.TA22.Java_SQL_Utils.Java_SQL;
 
-public class VideosTableModel {
+@SuppressWarnings("serial")
+public class VideosTableModel extends AbstractTableModel {
 
 	// Table attributes
 	private List<Videos> videos;
@@ -24,6 +26,15 @@ public class VideosTableModel {
 	// Generate table based on SQL data
 	public VideosTableModel() {
 		updateTable();
+	}
+	
+	// Functions
+	public int getRowCount() {
+		return videos.size();
+	}
+
+	public int getColumnCount() {
+		return columnNames.length;
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
