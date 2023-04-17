@@ -24,5 +24,4 @@ public class ejercicio3_App {
 			}
 		});
 	}
-
 }
