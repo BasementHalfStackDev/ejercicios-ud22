@@ -1,5 +1,5 @@
 # Ejercicios unidad 22
-Ejercicious de la Unidad 22 - Patrón Modelo-Vista-Controlador
+Ejercicios de la Unidad 22 - Patrón Modelo-Vista-Controlador
 
 Ejercicio 1 - Programa Java con tabla unica que conecta a una base de datos SQL. Permitiendo Agregar, eliminar, modificar, limpiar el formulario y filtrar la información mostrada.
 
